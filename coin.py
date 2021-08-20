@@ -14,7 +14,7 @@ chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 chrome_driver = "C:/Users/황길연/Desktop/html/chromedriver.exe"
 driver = webdriver.Chrome(executable_path=chrome_driver, options=chrome_options)
 driver.get('https://www.binance.com/en/futures/AVAXUSDT')
-token = "xoxb-2409343342448-2385969245523-PxPmo3VDphmyXyOu6ZYzVP1Z"
+token = "<token-code>"
 slack = Slacker(token)
 
 def post_message(token, channel, text):
