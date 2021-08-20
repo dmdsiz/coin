@@ -12,9 +12,9 @@ from slacker import Slacker
 chrome_options = Options()
 chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 chrome_driver = "C:/Users/황길연/Desktop/html/chromedriver.exe"
-driver = webdriver.Chrome(chrome_driver, options=chrome_options)
-driver.get('https://www.binance.com/en/futures/SOLUSDT')
-token = "xoxb-2409343342448-2385969245523-lAIzZ4ycBWXXZfHZtr2nPZ6E"
+driver = webdriver.Chrome(executable_path=chrome_driver, options=chrome_options)
+driver.get('https://www.binance.com/en/futures/AVAXUSDT')
+token = "xoxb-2409343342448-2385969245523-PxPmo3VDphmyXyOu6ZYzVP1Z"
 slack = Slacker(token)
 
 def post_message(token, channel, text):
@@ -23,11 +23,9 @@ def post_message(token, channel, text):
         data={"channel": channel,"text": text}
     )
     print(response)
-myToken = "xoxb-2409343342448-2385969245523-lAIzZ4ycBWXXZfHZtr2nPZ6E"
+myToken = "xoxb-2409343342448-2385969245523-PxPmo3VDphmyXyOu6ZYzVP1Z"
 
 def job():
-    count = 0
-    count2 = 0
     macd = driver.find_element_by_xpath('//*[@id="__APP"]/div/div[3]/div/div/div[3]/div[3]/div/div/div/div/div[2]/div/div/div[2]/div/div[4]/div/div[2]/span[4]').text
     ma20 = driver.find_element_by_xpath('//*[@id="__APP"]/div/div[3]/div/div/div[3]/div[3]/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div[2]/div[2]/span[2]').text
     ma60 = driver.find_element_by_xpath('//*[@id="__APP"]/div/div[3]/div/div/div[3]/div[3]/div/div/div/div/div[2]/div/div/div[2]/div/div[1]/div[2]/div[2]/span[4]').text
@@ -38,20 +36,14 @@ def job():
     if float(ma20) < float(ma60) < float(ma120):
       if float(macd) < 0:
         if float(j) < float(k) < float(d):
-          count += 1
           post_message(myToken,"#5","숏")
-      else:
-        count2 += 1
-        
+          print('숏',datetime.datetime.now())
     elif float(ma120) < float(ma60) < float(ma20):
       if float(macd) > 0:
         if float(d) < float(k) < float(j):
-          count += 1
           post_message(myToken,"#5","롱")
-      else:
-        count2 += 1
-
-schedule.every(1).minutes.do(job)
+          print('롱',datetime.datetime.now())
+schedule.every(30).seconds.do(job)
 while True:
   schedule.run_pending()
   time.sleep(1)
