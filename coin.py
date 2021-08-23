@@ -20,8 +20,7 @@ slack = Slacker(token)
 def post_message(token, channel, text):
     response = requests.post("https://slack.com/api/chat.postMessage",
         headers={"Authorization": "Bearer "+token},
-        data={"channel": channel,"text": text}
-    )
+        data={"channel": channel,"text": text})
     print(response)
 myToken = "xoxb-2409343342448-2385969245523-PxPmo3VDphmyXyOu6ZYzVP1Z"
 
