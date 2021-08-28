@@ -25,7 +25,7 @@ def post_message(token, channel, text):         # 슬랙으로 알람을 보내�
       headers={"Authorization": "Bearer "+token},
       data={"channel": channel,"text": text})
   print(response)
-myToken = "xoxb-2409343342448-2385969245523-uqY6mzcTQY45IoodM6KJVDNV"
+myToken = "token"
 
 def job():
   macd = driver.find_element_by_xpath('/html/body/div[2]/div[1]/div[2]/div[1]/div/table/tr[3]/td[2]/div/div[1]/div/div[2]/div[2]/div[2]/div/div[1]/div').text
